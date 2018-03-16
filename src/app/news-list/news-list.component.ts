@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {forEach} from '@angular/router/src/utils/collection';
 import {Article, ArticlesResponse} from '../article';
 import 'rxjs/add/operator/map';
+import {ArticlesService} from '../articles.service';
 
 
 const httpOptions = {
@@ -20,15 +19,18 @@ export class NewsListComponent implements OnInit {
   public articles: Array<Article> = [];
 
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private _articleService: ArticlesService) {
   }
 
   ngOnInit() {
-    this.httpClient.get<ArticlesResponse>
-    ('https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=b561fc10dd714a14a4eaf352d8d99208')
+    this.getArticles();
+  }
+
+  getArticles() {
+    this._articleService.getArticles()
       .map(data => data.articles)
-      .subscribe((articles) => {
-        this.articles = articles;
+      .subscribe(data => {
+        this.articles = data;
         console.log(this.articles);
       });
   }

@@ -1,9 +1,10 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {NewsListComponent} from './news-list/news-list.component';
+import {ArticlesService} from './articles.service';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import {NewsListComponent} from './news-list/news-list.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ArticlesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
