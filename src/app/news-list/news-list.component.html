@@ -3,10 +3,10 @@
 </h3>
 <ng-container *ngIf="articles.length > 0; else noTask">
   <ul>
-    <li *ngFor="let task of articles; " >
-      <h4>{{task.title}}</h4>
+    <li *ngFor="let article of articles; " >
+      <h4>{{article.title}}</h4>
       <p>
-        {{task.author}}
+        {{article.author}}
       </p>
     </li>
   </ul>

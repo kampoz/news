@@ -1,10 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
-import { AppComponent } from './app.component';
-import { NewsListComponent } from './news-list/news-list.component';
-import {ArticlesService} from './articles.service';
+import {AppComponent} from './app.component';
+import {NewsListComponent} from './news-list/news-list.component';
 
 
 @NgModule({
@@ -16,7 +15,8 @@ import {ArticlesService} from './articles.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [ArticlesService],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
