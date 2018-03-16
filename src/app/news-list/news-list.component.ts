@@ -3,6 +3,7 @@ import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Article, ArticlesResponse} from '../article';
 import 'rxjs/add/operator/map';
 import {ArticlesService} from '../articles.service';
+import {errorObject} from 'rxjs/util/errorObject';
 
 
 const httpOptions = {
@@ -17,6 +18,7 @@ const httpOptions = {
 export class NewsListComponent implements OnInit {
   json: JSON;
   public articles: Array<Article> = [];
+  public errorMsg;
 
 
   constructor(private _articleService: ArticlesService) {
@@ -28,10 +30,10 @@ export class NewsListComponent implements OnInit {
 
   getArticles() {
     this._articleService.getArticles()
-      .map(data => data.articles)
       .subscribe(data => {
         this.articles = data;
         console.log(this.articles);
-      });
+      },
+      error => this.errorMsg = error);
   }
 }

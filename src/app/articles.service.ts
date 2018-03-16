@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ArticlesResponse} from './article';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import 'rxjs/add/operator/catch';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ArticlesService {
@@ -11,6 +13,12 @@ export class ArticlesService {
   }
 
   getArticles() {
-    return this.httpClient.get<ArticlesResponse>(this._url);
+    return this.httpClient.get<ArticlesResponse>(this._url)
+      .map(data => data.articles)
+      .catch(this.errorHandler);
+  }
+
+  private errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || 'Server error');
   }
 }
