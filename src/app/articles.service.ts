@@ -7,7 +7,8 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class ArticlesService {
 
-  private _url = 'https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=b561fc10dd714a14a4eaf352d8d99208';
+  private API_KEY = 'b561fc10dd714a14a4eaf352d8d99208';
+  private _url = 'https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=' + this.API_KEY;
 
   constructor(private httpClient: HttpClient) {
   }

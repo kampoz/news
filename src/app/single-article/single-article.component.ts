@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-single-article',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./single-article.component.css']
 })
 export class SingleArticleComponent implements OnInit {
+  public title;
+  public description;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
+    const title = this.route.snapshot.paramMap.get('title');
+    this.title = title;
+    const description = this.route.snapshot.paramMap.get('description');
+    this.description = description;
   }
 
 }

@@ -4,6 +4,7 @@ import {Article, ArticlesResponse} from '../article';
 import 'rxjs/add/operator/map';
 import {ArticlesService} from '../articles.service';
 import {errorObject} from 'rxjs/util/errorObject';
+import {Router} from '@angular/router';
 
 
 const httpOptions = {
@@ -21,7 +22,7 @@ export class NewsListComponent implements OnInit {
   public errorMsg;
 
 
-  constructor(private _articleService: ArticlesService) {
+  constructor(private _articleService: ArticlesService, private router: Router) {
   }
 
   ngOnInit() {
@@ -35,5 +36,9 @@ export class NewsListComponent implements OnInit {
         console.log(this.articles);
       },
       error => this.errorMsg = error);
+  }
+
+  onSelect(article) {
+    this.router.navigate(['/article', article.title]);
   }
 }
