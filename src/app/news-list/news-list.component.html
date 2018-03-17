@@ -3,10 +3,10 @@
 </h3>
 <ng-container *ngIf="articles.length > 0; else noTask">
   <ul>
-    <li (click)="onSelect(article)" *ngFor="let article of articles; " >
+    <li (click)="onSelect(article)" *ngFor="let article of articles; ">
       <h4>{{article.title}}</h4>
       <p>
-        {{article.author}}
+        {{article.description}}
       </p>
     </li>
   </ul>
