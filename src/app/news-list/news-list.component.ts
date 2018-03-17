@@ -5,6 +5,10 @@ import 'rxjs/add/operator/map';
 import {ArticlesService} from '../articles.service';
 import {errorObject} from 'rxjs/util/errorObject';
 import {Router} from '@angular/router';
+import {DataService} from '../data.service';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/observeOn';
+import 'rxjs/add/operator/mergeMap';
 
 
 const httpOptions = {
@@ -19,26 +23,30 @@ const httpOptions = {
 export class NewsListComponent implements OnInit {
   json: JSON;
   public articles: Array<Article> = [];
+  public descriptions: Array<string> = [];
   public errorMsg;
 
-
-  constructor(private _articleService: ArticlesService, private router: Router) {
+  constructor(private _articleService: ArticlesService, private router: Router, private _data: DataService) {
   }
 
   ngOnInit() {
     this.getArticles();
+    this._data.changeArticle(this.articles);
   }
 
   getArticles() {
     this._articleService.getArticles()
       .subscribe(data => {
-        this.articles = data;
-        console.log(this.articles);
-      },
-      error => this.errorMsg = error);
+          this.articles = data;
+          console.log('NewsListComponent');
+          console.log(this.articles);
+        },
+        error => this.errorMsg = error);
   }
 
   onSelect(article) {
+    this._data.changeArticle(article);
+    console.log('article.title: ' + article.title);
     this.router.navigate(['/article', article.title]);
   }
 }

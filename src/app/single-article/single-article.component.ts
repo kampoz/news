@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {DataService} from '../data.service';
+import {Article} from '../article';
 
 @Component({
   selector: 'app-single-article',
@@ -8,16 +10,25 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SingleArticleComponent implements OnInit {
   public title;
-  public description;
+  article: Article;
+  // description: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private _data: DataService) {
   }
 
   ngOnInit() {
+    this._data.article.subscribe((article: Article) => {
+      this.article = article;
+      console.log('SingleArticleComponent ngOnInit() in LAMBDA');
+      console.log(article.title);
+    });
+    console.log('SingleArticleComponent');
+    console.log(this.article.description);
+
+
     const title = this.route.snapshot.paramMap.get('title');
     this.title = title;
-    const description = this.route.snapshot.paramMap.get('description');
-    this.description = description;
+
   }
 
 }
